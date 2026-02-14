@@ -1,3 +1,165 @@
+:root {
+  --bg: #f6f7fb;
+  --card-bg: #ffffff;
+  --accent: #2b8aef;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --shadow: 0 6px 18px rgba(31,41,55,0.08);
+}
+
+* { box-sizing: border-box; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: linear-gradient(180deg, var(--bg), #eef2f8);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+section[aria-labelledby="menu-heading"]{
+  max-width:1100px;
+  margin:2rem auto;
+  padding:1rem;
+}
+
+h1#menu-heading{
+  margin:0 0 1rem 0;
+  font-size:1.6rem;
+  letter-spacing:0.2px;
+}
+
+.menu-list{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap:1rem;
+}
+
+.menu-item{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap:1rem;
+  padding:1rem;
+  background:var(--card-bg);
+  border-radius:12px;
+  box-shadow:var(--shadow);
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+
+.menu-item:focus-within,
+.menu-item:hover{
+  transform:translateY(-4px);
+  box-shadow:0 10px 30px rgba(31,41,55,0.12);
+}
+
+figure{ margin:0; }
+figure img{
+  width:120px;
+  height:120px;
+  object-fit:cover;
+  border-radius:8px;
+  display:block;
+}
+
+.menu-item h2{ margin:0 0 0.35rem 0; font-size:1.05rem; }
+.menu-item p{ margin:0 0 0.35rem 0; color:var(--muted); }
+.menu-item p strong{ color:var(--accent); font-weight:700; font-size:1rem; }
+.menu-item p:last-child{ margin:0; font-size:0.9rem; color:var(--muted); }
+
+.menu-item div{ min-width:0; }
+
+/* Price row alignment for small labels */
+.menu-item > div > p:nth-child(3){ margin-top:0.3rem; }
+
+/* Accessibility: focus visible */
+.menu-item a:focus, .menu-item button:focus { outline:2px solid var(--accent); border-radius:6px; }
+
+/* Mobile adjustments */
+@media (max-width: 680px){
+  .menu-item{ grid-template-columns: 1fr; gap:0.75rem; }
+  figure img{ width:100%; height:200px; }
+  section[aria-labelledby="menu-heading"]{ padding:0.75rem; }
+  h1#menu-heading{ font-size:1.3rem; margin-bottom:0.75rem; }
+}
+
+/* Larger screens: slightly bigger images */
+@media (min-width: 1100px){
+  .menu-item{ grid-template-columns:140px 1fr; }
+  figure img{ width:140px; height:140px; }
+}
+
+/* Utility */
+.visually-hidden{ position:absolute !important; height:1px; width:1px; overflow:hidden; clip:rect(1px,1px,1px,1px); white-space:nowrap; }
+
+/* Flip card styles */
+.flip-card{ perspective:1000px; }
+.flip-inner{ position:relative; transition: transform .7s; transform-style:preserve-3d; }
+.flip-inner.is-flipped{ transform: rotateY(180deg); }
+.card-front,
+.card-back{
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  position:relative;
+}
+.card-back{
+  position:absolute;
+  inset:0;
+  padding:1rem;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  border-radius:12px;
+  background: linear-gradient(180deg,#fff,#fbfdff);
+  transform: rotateY(180deg);
+}
+.card-back h3{ margin:0 0 0.5rem 0; color:var(--text); }
+.card-back p{ margin:0 0 0.5rem 0; color:var(--muted); }
+.card-back .muted{ font-size:0.9rem; color:var(--muted); }
+.flip-toggle{
+  margin-top:0.6rem;
+  background:transparent;
+  border:1px solid rgba(43,138,239,0.12);
+  color:var(--accent);
+  padding:0.45rem 0.6rem;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:600;
+}
+.flip-toggle:active{ transform:translateY(1px); }
+
+/* Ensure front/back stacking matches card size */
+.menu-item{ position:relative; overflow:visible; }
+.card-front{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin:0;
+  padding:0;
+  border-radius:12px;
+  background: var(--card-bg);
+  box-shadow: var(--shadow);
+}
+.card-front figure{
+  margin:0;
+}
+.card-front img{
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+@media (max-width:680px){
+  .card-front{ grid-template-columns: 1fr; }
+  .card-back{ transform: rotateY(180deg); }
+}
+
 p {
   font-family: "Unna", serif;
   font-weight: 400;
